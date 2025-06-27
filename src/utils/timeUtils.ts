@@ -3,7 +3,10 @@ import { HABITAT_SCHEDULES } from "../data/pokemonData";
 
 export const getCurrentHabitat = (): HabitatType | null => {
   const now = new Date();
-  const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+  const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
 
   for (const schedule of HABITAT_SCHEDULES) {
     for (const timeSlot of schedule.timeSlots) {
@@ -19,7 +22,7 @@ export const getCurrentHabitat = (): HabitatType | null => {
 export const isTimeInRange = (
   currentTime: string,
   startTime: string,
-  endTime: string,
+  endTime: string
 ): boolean => {
   const current = timeToMinutes(currentTime);
   const start = timeToMinutes(startTime);
@@ -38,7 +41,10 @@ export const getNextHabitat = (): {
   startsAt: string;
 } | null => {
   const now = new Date();
-  const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+  const currentTime = `${now.getHours().toString().padStart(2, "0")}:${now
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
   const currentMinutes = timeToMinutes(currentTime);
 
   // Find the next upcoming time slot
@@ -77,7 +83,10 @@ export const getNextHabitat = (): {
 export const getTimeUntilNext = (targetTime: string): string => {
   const now = new Date();
   const currentMinutes = timeToMinutes(
-    `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`,
+    `${now.getHours().toString().padStart(2, "0")}:${now
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}`
   );
   const targetMinutes = timeToMinutes(targetTime);
 
@@ -118,7 +127,29 @@ export const getAllHabitatTimes = (): Array<{
     habitat: schedule.habitat,
     name: schedule.name,
     timeRanges: schedule.timeSlots.map((slot) =>
-      formatTimeRange(slot.start, slot.end),
+      formatTimeRange(slot.start, slot.end)
     ),
   }));
+};
+
+export const getCurrentDay = (): "saturday" | "sunday" | "other" => {
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0 = Sunday, 6 = Saturday
+
+  if (dayOfWeek === 6) return "saturday";
+  if (dayOfWeek === 0) return "sunday";
+  return "other";
+};
+
+export const isSaturday = (): boolean => {
+  return getCurrentDay() === "saturday";
+};
+
+export const isSunday = (): boolean => {
+  return getCurrentDay() === "sunday";
+};
+
+export const isWeekend = (): boolean => {
+  const day = getCurrentDay();
+  return day === "saturday" || day === "sunday";
 };

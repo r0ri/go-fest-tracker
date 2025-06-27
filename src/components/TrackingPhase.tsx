@@ -10,6 +10,8 @@ import {
   getCurrentHabitat,
   getNextHabitat,
   getTimeUntilNext,
+  isSaturday,
+  isSunday,
 } from "../utils/timeUtils";
 import PokemonCard from "./PokemonCard";
 import CurrentHabitat from "./CurrentHabitat";
@@ -148,10 +150,13 @@ const TrackingPhase = ({
     );
   };
 
-  const renderSaturdaySection = () => {
+  const renderSaturdaySection = (forceShow = false) => {
     const trackedPokemon = getTrackedSaturdayPokemon();
 
     if (trackedPokemon.length === 0) return null;
+    
+    // Only show on Saturday unless forced (All Habitats view)
+    if (!forceShow && !isSaturday()) return null;
 
     return (
       <div className="spawn-section saturday">
@@ -183,10 +188,13 @@ const TrackingPhase = ({
     );
   };
 
-  const renderSundaySection = () => {
+  const renderSundaySection = (forceShow = false) => {
     const trackedPokemon = getTrackedSundayPokemon();
 
     if (trackedPokemon.length === 0) return null;
+    
+    // Only show on Sunday unless forced (All Habitats view)
+    if (!forceShow && !isSunday()) return null;
 
     return (
       <div className="spawn-section sunday">
@@ -276,8 +284,8 @@ const TrackingPhase = ({
             {/* Saturday and Sunday sections */}
             <div className="special-spawns-group">
               <h2>Special Spawns</h2>
-              {renderSaturdaySection()}
-              {renderSundaySection()}
+              {renderSaturdaySection(true)}
+              {renderSundaySection(true)}
             </div>
           </div>
         ) : (
@@ -289,8 +297,8 @@ const TrackingPhase = ({
               </div>
             )}
             
-            {/* Always show Saturday/Sunday spawns as they're available all day */}
-            <div className="always-available">
+            {/* Show Saturday/Sunday spawns only on their respective days */}
+            <div className="day-specific-spawns">
               {renderSaturdaySection()}
               {renderSundaySection()}
             </div>
@@ -314,7 +322,7 @@ const TrackingPhase = ({
                   </p>
                 )}
                 <p className="special-spawns-note">
-                  Saturday and Sunday spawns are still available below!
+                  Saturday and Sunday spawns are shown below on their respective days!
                 </p>
               </div>
             )}
