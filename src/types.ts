@@ -4,10 +4,14 @@ export type HabitatType =
   | "hypnotic-tundra"
   | "fae-swamp";
 
+export type SpawnCategory = "habitat" | "saturday" | "sunday" | "incense";
+
 export interface Pokemon {
   id: string;
   name: string;
-  habitat: HabitatType;
+  habitat?: HabitatType; // Optional for non-habitat spawns
+  category: SpawnCategory;
+  isIncense?: boolean; // For marking incense spawns within habitats
 }
 
 export interface TrackedPokemon extends Pokemon {

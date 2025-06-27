@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
-import type { HabitatType } from "../types";
-import { HABITAT_POKEMON, getHabitatSchedule } from "../data/pokemonData";
+import type { HabitatType, SpawnCategory } from "../types";
+import {
+  HABITAT_POKEMON,
+  SATURDAY_POKEMON,
+  SUNDAY_POKEMON,
+  getHabitatSchedule
+} from "../data/pokemonData";
 import {
   getCurrentHabitat,
   getNextHabitat,
@@ -49,12 +54,26 @@ const TrackingPhase = ({
     );
   };
 
+  const getTrackedSaturdayPokemon = () => {
+    return SATURDAY_POKEMON.filter(
+      (pokemon) => selectedPokemon[pokemon.id],
+    );
+  };
+
+  const getTrackedSundayPokemon = () => {
+    return SUNDAY_POKEMON.filter(
+      (pokemon) => selectedPokemon[pokemon.id],
+    );
+  };
+
   const getAllTrackedPokemon = () => {
     const allTracked = [];
     for (const habitat of Object.keys(HABITAT_POKEMON) as HabitatType[]) {
       const trackedInHabitat = getTrackedPokemonForHabitat(habitat);
       allTracked.push(...trackedInHabitat);
     }
+    allTracked.push(...getTrackedSaturdayPokemon());
+    allTracked.push(...getTrackedSundayPokemon());
     return allTracked;
   };
 
@@ -64,6 +83,20 @@ const TrackingPhase = ({
 
   const getHabitatShinyCount = (habitat: HabitatType) => {
     return getTrackedPokemonForHabitat(habitat).reduce(
+      (sum, pokemon) => sum + (shinyCounts[pokemon.id] || 0),
+      0,
+    );
+  };
+
+  const getSaturdayShinyCount = () => {
+    return getTrackedSaturdayPokemon().reduce(
+      (sum, pokemon) => sum + (shinyCounts[pokemon.id] || 0),
+      0,
+    );
+  };
+
+  const getSundayShinyCount = () => {
+    return getTrackedSundayPokemon().reduce(
       (sum, pokemon) => sum + (shinyCounts[pokemon.id] || 0),
       0,
     );
@@ -92,6 +125,76 @@ const TrackingPhase = ({
           <div className="habitat-stats">
             <span className="shiny-total">
               ✨ {getHabitatShinyCount(habitat)} shinies
+            </span>
+            <span className="pokemon-count">
+              {trackedPokemon.length} Pokemon
+            </span>
+          </div>
+        </div>
+
+        <div className="pokemon-grid">
+          {trackedPokemon.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.id}
+              pokemon={pokemon}
+              shinyCount={shinyCounts[pokemon.id] || 0}
+              onIncrement={() => onIncrementShiny(pokemon.id)}
+              onDecrement={() => onDecrementShiny(pokemon.id)}
+              mode="tracking"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderSaturdaySection = () => {
+    const trackedPokemon = getTrackedSaturdayPokemon();
+
+    if (trackedPokemon.length === 0) return null;
+
+    return (
+      <div className="spawn-section saturday">
+        <div className="spawn-header">
+          <h3>Saturday All-Day Spawns</h3>
+          <div className="spawn-stats">
+            <span className="shiny-total">
+              ✨ {getSaturdayShinyCount()} shinies
+            </span>
+            <span className="pokemon-count">
+              {trackedPokemon.length} Pokemon
+            </span>
+          </div>
+        </div>
+
+        <div className="pokemon-grid">
+          {trackedPokemon.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.id}
+              pokemon={pokemon}
+              shinyCount={shinyCounts[pokemon.id] || 0}
+              onIncrement={() => onIncrementShiny(pokemon.id)}
+              onDecrement={() => onDecrementShiny(pokemon.id)}
+              mode="tracking"
+            />
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderSundaySection = () => {
+    const trackedPokemon = getTrackedSundayPokemon();
+
+    if (trackedPokemon.length === 0) return null;
+
+    return (
+      <div className="spawn-section sunday">
+        <div className="spawn-header">
+          <h3>Sunday All-Day Spawns</h3>
+          <div className="spawn-stats">
+            <span className="shiny-total">
+              ✨ {getSundayShinyCount()} shinies
             </span>
             <span className="pokemon-count">
               {trackedPokemon.length} Pokemon
@@ -161,16 +264,39 @@ const TrackingPhase = ({
 
       <div className="tracking-content">
         {showAllHabitats ? (
-          <div className="all-habitats">
-            {(Object.keys(HABITAT_POKEMON) as HabitatType[]).map(
-              renderHabitatSection,
-            )}
+          <div className="all-sections">
+            {/* Habitat sections */}
+            <div className="habitats-group">
+              <h2>Habitat Spawns</h2>
+              {(Object.keys(HABITAT_POKEMON) as HabitatType[]).map(
+                renderHabitatSection,
+              )}
+            </div>
+            
+            {/* Saturday and Sunday sections */}
+            <div className="special-spawns-group">
+              <h2>Special Spawns</h2>
+              {renderSaturdaySection()}
+              {renderSundaySection()}
+            </div>
           </div>
         ) : (
-          <div className="current-habitat-content">
-            {currentHabitat ? (
-              renderHabitatSection(currentHabitat)
-            ) : (
+          <div className="current-view-content">
+            {/* Current habitat section */}
+            {currentHabitat && (
+              <div className="current-habitat-section">
+                {renderHabitatSection(currentHabitat)}
+              </div>
+            )}
+            
+            {/* Always show Saturday/Sunday spawns as they're available all day */}
+            <div className="always-available">
+              {renderSaturdaySection()}
+              {renderSundaySection()}
+            </div>
+            
+            {/* No active habitat message */}
+            {!currentHabitat && (
               <div className="no-active-habitat">
                 <h3>No Active Habitat</h3>
                 <p>
@@ -187,6 +313,9 @@ const TrackingPhase = ({
                     {getTimeUntilNext(nextHabitat.startsAt)})
                   </p>
                 )}
+                <p className="special-spawns-note">
+                  Saturday and Sunday spawns are still available below!
+                </p>
               </div>
             )}
           </div>

@@ -1,4 +1,9 @@
-import type { Pokemon, HabitatSchedule, HabitatType } from "../types";
+import type {
+  Pokemon,
+  HabitatSchedule,
+  HabitatType,
+  SpawnCategory,
+} from "../types";
 
 export const HABITAT_SCHEDULES: HabitatSchedule[] = [
   {
@@ -57,79 +62,309 @@ export const HABITAT_SCHEDULES: HabitatSchedule[] = [
 
 export const HABITAT_POKEMON: Record<HabitatType, Pokemon[]> = {
   "moonless-volcano": [
-    { id: "houndour", name: "Houndour", habitat: "moonless-volcano" },
-    { id: "numel", name: "Numel", habitat: "moonless-volcano" },
-    { id: "duskull", name: "Duskull", habitat: "moonless-volcano" },
-    { id: "gothita", name: "Gothita", habitat: "moonless-volcano" },
-    { id: "golett", name: "Golett", habitat: "moonless-volcano" },
-    { id: "fletchling", name: "Fletchling", habitat: "moonless-volcano" },
+    {
+      id: "houndour",
+      name: "Houndour",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "numel",
+      name: "Numel",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "duskull",
+      name: "Duskull",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "gothita",
+      name: "Gothita",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "golett",
+      name: "Golett",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "fletchling",
+      name: "Fletchling",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
     {
       id: "flabebe-red",
       name: "Flabébé (Red Flower)",
       habitat: "moonless-volcano",
+      category: "habitat",
     },
-    { id: "skrelp", name: "Skrelp", habitat: "moonless-volcano" },
-    { id: "fuecoco", name: "Fuecoco", habitat: "moonless-volcano" },
-    { id: "carbink", name: "Carbink", habitat: "moonless-volcano" },
+    {
+      id: "skrelp",
+      name: "Skrelp",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "fuecoco",
+      name: "Fuecoco",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    {
+      id: "carbink",
+      name: "Carbink",
+      habitat: "moonless-volcano",
+      category: "habitat",
+    },
+    // Incense spawn for this habitat
+    {
+      id: "torkoal",
+      name: "Torkoal",
+      habitat: "moonless-volcano",
+      category: "incense",
+      isIncense: true,
+    },
   ],
   "galvanic-dojo": [
-    { id: "machop", name: "Machop", habitat: "galvanic-dojo" },
-    { id: "electabuzz", name: "Electabuzz", habitat: "galvanic-dojo" },
-    { id: "teddiursa", name: "Teddiursa", habitat: "galvanic-dojo" },
-    { id: "scraggy", name: "Scraggy", habitat: "galvanic-dojo" },
-    { id: "chespin", name: "Chespin", habitat: "galvanic-dojo" },
+    {
+      id: "machop",
+      name: "Machop",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "electabuzz",
+      name: "Electabuzz",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "teddiursa",
+      name: "Teddiursa",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "scraggy",
+      name: "Scraggy",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "chespin",
+      name: "Chespin",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
     {
       id: "flabebe-yellow",
       name: "Flabébé (Yellow Flower)",
       habitat: "galvanic-dojo",
+      category: "habitat",
     },
-    { id: "pancham", name: "Pancham", habitat: "galvanic-dojo" },
-    { id: "dedenne", name: "Dedenne", habitat: "galvanic-dojo" },
-    { id: "crabrawler", name: "Crabrawler", habitat: "galvanic-dojo" },
-    { id: "mienfoo", name: "Mienfoo", habitat: "galvanic-dojo" },
+    {
+      id: "pancham",
+      name: "Pancham",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "dedenne",
+      name: "Dedenne",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "crabrawler",
+      name: "Crabrawler",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    {
+      id: "mienfoo",
+      name: "Mienfoo",
+      habitat: "galvanic-dojo",
+      category: "habitat",
+    },
+    // Incense spawn for this habitat
+    {
+      id: "skiddo",
+      name: "Skiddo",
+      habitat: "galvanic-dojo",
+      category: "incense",
+      isIncense: true,
+    },
   ],
   "hypnotic-tundra": [
     {
       id: "alolan-sandshrew",
       name: "Alolan Sandshrew",
       habitat: "hypnotic-tundra",
+      category: "habitat",
     },
-    { id: "swinub", name: "Swinub", habitat: "hypnotic-tundra" },
-    { id: "spheal", name: "Spheal", habitat: "hypnotic-tundra" },
-    { id: "piplup", name: "Piplup", habitat: "hypnotic-tundra" },
-    { id: "snover", name: "Snover", habitat: "hypnotic-tundra" },
-    { id: "munna", name: "Munna", habitat: "hypnotic-tundra" },
-    { id: "elgyem", name: "Elgyem", habitat: "hypnotic-tundra" },
+    {
+      id: "swinub",
+      name: "Swinub",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    {
+      id: "spheal",
+      name: "Spheal",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    {
+      id: "piplup",
+      name: "Piplup",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    {
+      id: "snover",
+      name: "Snover",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    {
+      id: "munna",
+      name: "Munna",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    {
+      id: "elgyem",
+      name: "Elgyem",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
     {
       id: "flabebe-blue",
       name: "Flabébé (Blue Flower)",
       habitat: "hypnotic-tundra",
+      category: "habitat",
     },
-    { id: "bergmite", name: "Bergmite", habitat: "hypnotic-tundra" },
-    { id: "frigibax", name: "Frigibax", habitat: "hypnotic-tundra" },
+    {
+      id: "bergmite",
+      name: "Bergmite",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    {
+      id: "frigibax",
+      name: "Frigibax",
+      habitat: "hypnotic-tundra",
+      category: "habitat",
+    },
+    // Incense spawn for this habitat
+    {
+      id: "pachirisu",
+      name: "Pachirisu",
+      habitat: "hypnotic-tundra",
+      category: "incense",
+      isIncense: true,
+    },
   ],
   "fae-swamp": [
-    { id: "clefairy", name: "Clefairy", habitat: "fae-swamp" },
-    { id: "tentacool", name: "Tentacool", habitat: "fae-swamp" },
-    { id: "mawile", name: "Mawile", habitat: "fae-swamp" },
-    { id: "gulpin", name: "Gulpin", habitat: "fae-swamp" },
-    { id: "venipede", name: "Venipede", habitat: "fae-swamp" },
-    { id: "popplio", name: "Popplio", habitat: "fae-swamp" },
-    { id: "mareanie", name: "Mareanie", habitat: "fae-swamp" },
-    { id: "morelull", name: "Morelull", habitat: "fae-swamp" },
-    { id: "togetic", name: "Togetic", habitat: "fae-swamp" },
+    {
+      id: "clefairy",
+      name: "Clefairy",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
+    {
+      id: "tentacool",
+      name: "Tentacool",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
+    { id: "mawile", name: "Mawile", habitat: "fae-swamp", category: "habitat" },
+    { id: "gulpin", name: "Gulpin", habitat: "fae-swamp", category: "habitat" },
+    {
+      id: "venipede",
+      name: "Venipede",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
+    {
+      id: "popplio",
+      name: "Popplio",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
+    {
+      id: "mareanie",
+      name: "Mareanie",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
+    {
+      id: "morelull",
+      name: "Morelull",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
+    {
+      id: "togetic",
+      name: "Togetic",
+      habitat: "fae-swamp",
+      category: "habitat",
+    },
     {
       id: "flabebe-orange",
       name: "Flabébé (Orange Flower)",
       habitat: "fae-swamp",
+      category: "habitat",
+    },
+    // Incense spawn for this habitat
+    {
+      id: "klefki",
+      name: "Klefki",
+      habitat: "fae-swamp",
+      category: "incense",
+      isIncense: true,
     },
   ],
 };
 
-export const ALL_POKEMON: Pokemon[] = Object.values(HABITAT_POKEMON).flat();
+// Saturday spawns - available all day Saturday
+export const SATURDAY_POKEMON: Pokemon[] = [
+  { id: "chansey", name: "Chansey", category: "saturday" },
+  { id: "skarmory", name: "Skarmory", category: "saturday" },
+  { id: "larvitar", name: "Larvitar", category: "saturday" },
+  { id: "shieldon", name: "Shieldon", category: "saturday" },
+  { id: "shelmet", name: "Shelmet", category: "saturday" },
+  { id: "vullaby", name: "Vullaby", category: "saturday" },
+  { id: "oranguru", name: "Oranguru", category: "saturday" },
+  { id: "goomy", name: "Goomy", category: "saturday" },
+];
+
+// Sunday spawns - available all day Sunday
+export const SUNDAY_POKEMON: Pokemon[] = [
+  { id: "galarian-farfetchd", name: "Galarian Farfetch'd", category: "sunday" },
+  { id: "cubone", name: "Cubone", category: "sunday" },
+  { id: "ralts", name: "Ralts", category: "sunday" },
+  { id: "karrablast", name: "Karrablast", category: "sunday" },
+  { id: "pawniard", name: "Pawniard", category: "sunday" },
+  { id: "deino", name: "Deino", category: "sunday" },
+  { id: "passimian", name: "Passimian", category: "sunday" },
+  { id: "jangmo-o", name: "Jangmo-o", category: "sunday" },
+];
+
+export const ALL_POKEMON: Pokemon[] = [
+  ...Object.values(HABITAT_POKEMON).flat(),
+  ...SATURDAY_POKEMON,
+  ...SUNDAY_POKEMON,
+];
 
 export const getHabitatByPokemonId = (
-  pokemonId: string,
+  pokemonId: string
 ): HabitatType | null => {
   for (const [habitat, pokemon] of Object.entries(HABITAT_POKEMON)) {
     if (pokemon.some((p) => p.id === pokemonId)) {
@@ -140,7 +375,44 @@ export const getHabitatByPokemonId = (
 };
 
 export const getHabitatSchedule = (
-  habitat: HabitatType,
+  habitat: HabitatType
 ): HabitatSchedule | undefined => {
   return HABITAT_SCHEDULES.find((schedule) => schedule.habitat === habitat);
+};
+
+// Helper functions for new spawn categories
+export const getPokemonByCategory = (category: SpawnCategory): Pokemon[] => {
+  switch (category) {
+    case "habitat":
+      return Object.values(HABITAT_POKEMON)
+        .flat()
+        .filter((p) => p.category === "habitat");
+    case "saturday":
+      return SATURDAY_POKEMON;
+    case "sunday":
+      return SUNDAY_POKEMON;
+    case "incense":
+      return Object.values(HABITAT_POKEMON)
+        .flat()
+        .filter((p) => p.category === "incense");
+    default:
+      return [];
+  }
+};
+
+export const getHabitatPokemon = (
+  habitat: HabitatType,
+  includeIncense: boolean = true
+): Pokemon[] => {
+  const habitatPokemon = HABITAT_POKEMON[habitat];
+  if (includeIncense) {
+    return habitatPokemon;
+  }
+  return habitatPokemon.filter((p) => !p.isIncense);
+};
+
+export const getIncensePokemonForHabitat = (
+  habitat: HabitatType
+): Pokemon[] => {
+  return HABITAT_POKEMON[habitat].filter((p) => p.isIncense);
 };

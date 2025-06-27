@@ -39,27 +39,49 @@ const PokemonCard = ({
     }
   };
 
+  const getCardClassName = () => {
+    const baseClass = `pokemon-card ${mode}-mode`;
+    const categoryClass = pokemon.category;
+    const habitatClass = pokemon.habitat || '';
+    const selectedClass = mode === "selection" && isSelected ? "selected" : "";
+    const incenseClass = pokemon.isIncense ? "incense" : "";
+    
+    return `${baseClass} ${categoryClass} ${habitatClass} ${selectedClass} ${incenseClass}`.trim();
+  };
+
   if (mode === "selection") {
     return (
       <div
-        className={`pokemon-card selection-mode ${pokemon.habitat} ${isSelected ? "selected" : ""}`}
+        className={getCardClassName()}
         onClick={handleSelectionToggle}
       >
-        <div className="pokemon-name">{pokemon.name}</div>
+        <div className="pokemon-name">
+          {pokemon.name}
+          {pokemon.isIncense && <span className="incense-indicator">🔥</span>}
+        </div>
         <div className="selection-indicator">{isSelected ? "✓" : "○"}</div>
+        {pokemon.category !== "habitat" && (
+          <div className="spawn-category">{pokemon.category}</div>
+        )}
       </div>
     );
   }
 
   // Tracking mode
   return (
-    <div className={`pokemon-card tracking-mode ${pokemon.habitat}`}>
+    <div className={getCardClassName()}>
       <div className="pokemon-info">
-        <div className="pokemon-name">{pokemon.name}</div>
+        <div className="pokemon-name">
+          {pokemon.name}
+          {pokemon.isIncense && <span className="incense-indicator">🔥</span>}
+        </div>
         <div className="shiny-count-display">
           <span className="shiny-icon">✨</span>
           <span className="count">{shinyCount}</span>
         </div>
+        {pokemon.category !== "habitat" && (
+          <div className="spawn-category">{pokemon.category}</div>
+        )}
       </div>
 
       <div className="counter-controls">
