@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { HabitatType, SpawnCategory } from "../types";
+import type { HabitatType } from "../types";
 import {
   HABITAT_POKEMON,
   SATURDAY_POKEMON,

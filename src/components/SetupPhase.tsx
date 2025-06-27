@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { HabitatType, SpawnCategory } from "../types";
+import type { HabitatType } from "../types";
 import {
   HABITAT_SCHEDULES,
   HABITAT_POKEMON,
